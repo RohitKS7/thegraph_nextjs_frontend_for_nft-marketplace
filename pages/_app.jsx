@@ -3,6 +3,14 @@ import { MoralisProvider } from "react-moralis"
 import Header from "../components/Header"
 import Head from "next/head"
 import { NotificationProvider } from "@web3uikit/core"
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client"
+
+// Initialize the Apollo for Subgraph, You can learn more on "apollo docs"
+
+const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    uri: "https://api.studio.thegraph.com/query/35572/nft-marketplace_by_rohitks7/v0.0.1",
+})
 
 function MyApp({ Component, pageProps }) {
     return (
@@ -16,10 +24,12 @@ function MyApp({ Component, pageProps }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <MoralisProvider initializeOnMount={false}>
-                <NotificationProvider>
-                    <Header />
-                    <Component {...pageProps} />
-                </NotificationProvider>
+                <ApolloProvider client={client}>
+                    <NotificationProvider>
+                        <Header />
+                        <Component {...pageProps} />
+                    </NotificationProvider>
+                </ApolloProvider>
             </MoralisProvider>
         </div>
     )
