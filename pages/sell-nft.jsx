@@ -135,27 +135,31 @@ export default function Home() {
                 title="Sell Your NFT"
                 id="Main Form"
             />
-            <div>Withdraw {proceeds} proceeds</div>
             {proceeds != "0" ? (
-                <Button
-                    onClick={() => {
-                        runContractFunction({
-                            params: {
-                                abi: marketplaceAbi,
-                                contractAddress: marketplaceAddress,
-                                functionName: "withdrawProceeds",
-                                params: {},
-                            },
-                            onError: (error) => console.log(error),
-                            onSuccess: handleWithdrawSuccess,
-                        })
-                    }}
-                    text="Withdraw"
-                    type="button"
-                    theme="primary"
-                />
+                <>
+                    <div className="m-2 font-sans text-base">
+                        You can Withdraw {proceeds} proceeds
+                    </div>
+                    <Button
+                        onClick={() => {
+                            runContractFunction({
+                                params: {
+                                    abi: marketplaceAbi,
+                                    contractAddress: marketplaceAddress,
+                                    functionName: "withdrawProceeds",
+                                    params: {},
+                                },
+                                onError: (error) => console.log(error),
+                                onSuccess: handleWithdrawSuccess,
+                            })
+                        }}
+                        text="Withdraw"
+                        type="button"
+                        theme="primary"
+                    />
+                </>
             ) : (
-                <div>No proceeds detected</div>
+                <div className="m-2 font-sans text-base">No proceeds detected</div>
             )}
         </div>
     )

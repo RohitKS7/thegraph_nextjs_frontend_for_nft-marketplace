@@ -3,7 +3,7 @@ import { useWeb3Contract, useMoralis } from "react-moralis"
 import nftAbi from "../constants/BasicNft.json"
 import marketplaceAbi from "../constants/NftMarketplace.json"
 import Image from "next/image"
-import { Card, useNotification } from "@web3uikit/core"
+import { Card, useNotification, Button } from "@web3uikit/core"
 import { ethers } from "ethers"
 import UpdateListingModal from "./UpdateListingModal"
 
@@ -124,26 +124,35 @@ export default function NFTBox({ price, nftAddress, tokenId, seller, marketplace
                         nftAddress={nftAddress}
                         onClose={hideModal}
                     />
-                    <Card title={tokenName} description={tokenDesc} onClick={handleCardClick}>
-                        <div className="p-2">
-                            <div className="flex flex-col items-end gap-2">
-                                <div>#{tokenId}</div>
-                                <div className="mb-4 italic text-sm">
-                                    Owned By: {formattedSellerAddress}{" "}
-                                </div>
-                                <Image
-                                    loader={() => imageURI}
-                                    src={imageURI}
-                                    alt="nft image"
-                                    height="200"
-                                    width="200"
-                                />
-                                <div className="font-bold">
-                                    Price: {ethers.utils.formatUnits(price, "ether")} ETH
+                    <div className="mr-4">
+                        <Card title={tokenName} description={tokenDesc}>
+                            <div className="p-2">
+                                <div className="flex flex-col items-end gap-2">
+                                    <div>#{tokenId}</div>
+                                    <div className="mb-4 italic text-sm">
+                                        Owned By: {formattedSellerAddress}{" "}
+                                    </div>
+                                    <Image
+                                        loader={() => imageURI}
+                                        src={imageURI}
+                                        alt="nft image"
+                                        height="200"
+                                        width="200"
+                                    />
+                                    <div className="font-bold">
+                                        Price: {ethers.utils.formatUnits(price, "ether")} ETH
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </Card>
+                        </Card>
+                        <br />
+                        <Button
+                            theme="primary"
+                            type="button"
+                            text="Own"
+                            onClick={handleCardClick}
+                        />
+                    </div>
                 </div>
             ) : (
                 <div>Loading...</div>

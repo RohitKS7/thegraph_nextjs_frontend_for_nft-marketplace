@@ -38,7 +38,7 @@ export default function Header() {
                         </Link>
                         <Link href="/sell-nft">
                             <a className="block mt-4 lg:inline-block lg:mt-0  text-teal-200 hover:text-white mr-4">
-                                Sell NFT
+                                Sell NFTs
                             </a>
                         </Link>
                     </div>
